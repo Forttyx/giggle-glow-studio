@@ -1,0 +1,23 @@
+// Centrální zdroj URL obrázků hostovaných na Vercel Blob.
+// POZOR: tyto URL obsahují podepsaný delegation token s expirací — pro produkci
+// nahraj obrázky jako veřejné (public) blob a nahraď URL čistými bez query parametrů.
+
+export const LOGO_CENTRUM =
+  "https://1zkfs35lj8hxzw2m.private.blob.vercel-storage.com/Anglicke%20cetntrum-Photoroom.png?vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfMVprRlMzNUxKOGhYWlcyTSIsIm93bmVySWQiOiJ0ZWFtXzY0ZUZTNUZlWmFyeklUZVJpWURJamVobSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxOTQzNTgxMDU4LCJpYXQiOjE3ODE5MDAzODEzMTR9.zgM2WKOwPpEdggQ7i50ehR2IsnSmb6xGnWsf7K2Htcw&vercel-blob-signature=3iCZmG3XckxXg5U10He6gBjJ9H9BtZmvlIXBK_SgFPc";
+
+export const LOGO_SKOLICKA =
+  "https://1zkfs35lj8hxzw2m.private.blob.vercel-storage.com/anglickaskolicka-Photoroom.png?vercel-blob-valid-until=1781900523826&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfMVprRlMzNUxKOGhYWlcyTSIsIm93bmVySWQiOiJ0ZWFtXzY0ZUZTNUZlWmFyeklUZVJpWURJamVobSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxOTQzNTkwNDkxLCJpYXQiOjE3ODE5MDAzOTA3NTd9.zeoTPuCl3tPKv5Q5JAaNpzlUicRSc5T1xZFiWLMCNro&vercel-blob-signature=W5p_s6v2V6M8cHZbTutib2hEFuCCmhd2enG7w6174sU";
+
+const PHOTO_KIDS_1 =
+  "https://1zkfs35lj8hxzw2m.private.blob.vercel-storage.com/WhatsApp%20Image%202026-06-19%20at%2021.37.25.jpeg?vercel-blob-valid-until=1781900481500&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfMVprRlMzNUxKOGhYWlcyTSIsIm93bmVySWQiOiJ0ZWFtXzY0ZUZTNUZlWmFyeklUZVJpWURJamVobSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxOTQzNTkwNDkxLCJpYXQiOjE3ODE5MDAzOTA3NTd9.zeoTPuCl3tPKv5Q5JAaNpzlUicRSc5T1xZFiWLMCNro&vercel-blob-signature=X9FTbN2hC0h_8B-dp8n8UbaIumsxvYd-iy9DHzzxH0w";
+
+const PHOTO_KIDS_2 =
+  "https://1zkfs35lj8hxzw2m.private.blob.vercel-storage.com/WhatsApp%20Image%202026-06-19%20at%2021.38.02.jpeg?vercel-blob-valid-until=1781900493711&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfMVprRlMzNUxKOGhYWlcyTSIsIm93bmVySWQiOiJ0ZWFtXzY0ZUZTNUZlWmFyeklUZVJpWURJamVobSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxOTQzNTkwNDkxLCJpYXQiOjE3ODE5MDAzOTA3NTd9.zeoTPuCl3tPKv5Q5JAaNpzlUicRSc5T1xZFiWLMCNro&vercel-blob-signature=trE3jBZ49QzTysw4peufvaC-kPJu-z_GvLf99fZA6Fs";
+
+const PHOTO_KIDS_3 =
+  "https://1zkfs35lj8hxzw2m.private.blob.vercel-storage.com/WhatsApp%20Image%202026-06-19%20at%2021.39.06.jpeg?vercel-blob-valid-until=1781900506473&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfMVprRlMzNUxKOGhYWlcyTSIsIm93bmVySWQiOiJ0ZWFtXzY0ZUZTNUZlWmFyeklUZVJpWURJamVobSIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxOTQzNTkwNDkxLCJpYXQiOjE3ODE5MDAzOTA3NTd9.zeoTPuCl3tPKv5Q5JAaNpzlUicRSc5T1xZFiWLMCNro&vercel-blob-signature=oJ2fyBcwfJm4KdnA0_-T5tLPY-nhBy3R1r1FH3f0iFg";
+
+export const HERO_IMAGE = PHOTO_KIDS_1;
+export const SKOLICKA_IMAGE = PHOTO_KIDS_2;
+export const DETI_IMAGE = PHOTO_KIDS_3;
+export const DOSPELI_IMAGE = PHOTO_KIDS_1;

@@ -3,9 +3,9 @@ import { PageShell, PageHero } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
 import { CTAButton } from "@/components/site/CTAButton";
 import { SectionTitle } from "@/components/site/SectionTitle";
-import skolickaAsset from "@/assets/real/skolicka-real.jpg.asset.json";
+import { SKOLICKA_IMAGE } from "@/lib/media";
 
-const skolickaImg = skolickaAsset.url;
+const skolickaImg = SKOLICKA_IMAGE;
 
 export const Route = createFileRoute("/anglicka-skolicka")({
   head: () => ({
