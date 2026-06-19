@@ -3,8 +3,10 @@ import { PageShell, PageHero } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
 import { CTAButton, CTAAnchor } from "@/components/site/CTAButton";
 import { DoodleStar } from "@/components/site/Doodles";
-import detiImg from "@/assets/deti-scene.jpg";
+import detiAsset from "@/assets/real/kurzy-real.jpg.asset.json";
 import { Mail, Phone } from "lucide-react";
+
+const detiImg = detiAsset.url;
 
 export const Route = createFileRoute("/anglictina-pro-deti")({
   head: () => ({
