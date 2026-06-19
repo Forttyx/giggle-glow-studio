@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
-import centrumLogo from "@/assets/real/logo-anglicke-centrum.png.asset.json";
-import skolickaLogo from "@/assets/real/logo-anglicka-skolicka.png.asset.json";
+import { LOGO_CENTRUM, LOGO_SKOLICKA } from "@/lib/media";
 
 const nav = [
   { to: "/", label: "Domů" },
@@ -22,12 +21,12 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <div className="flex items-center gap-2 sm:gap-3">
             <img
-              src={centrumLogo.url}
+              src={LOGO_CENTRUM}
               alt="Logo Anglické Centrum"
               className="h-9 w-auto sm:h-10 lg:h-11"
             />
             <img
-              src={skolickaLogo.url}
+              src={LOGO_SKOLICKA}
               alt="Logo Anglická školička"
               className="h-10 w-auto sm:h-11 lg:h-12"
             />

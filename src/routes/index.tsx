@@ -12,15 +12,12 @@ import {
   DoodleSun,
   UnionJackBunting,
 } from "@/components/site/Doodles";
-import heroAsset from "@/assets/real/hero-real.jpg.asset.json";
-import skolickaAsset from "@/assets/real/skolicka-real.jpg.asset.json";
-import detiAsset from "@/assets/real/kurzy-real.jpg.asset.json";
-import dospeliAsset from "@/assets/real/program-real.jpg.asset.json";
+import { HERO_IMAGE, SKOLICKA_IMAGE, DETI_IMAGE, DOSPELI_IMAGE } from "@/lib/media";
 
-const heroImg = heroAsset.url;
-const skolickaImg = skolickaAsset.url;
-const detiImg = detiAsset.url;
-const dospeliImg = dospeliAsset.url;
+const heroImg = HERO_IMAGE;
+const skolickaImg = SKOLICKA_IMAGE;
+const detiImg = DETI_IMAGE;
+const dospeliImg = DOSPELI_IMAGE;
 
 export const Route = createFileRoute("/")({
   head: () => ({
