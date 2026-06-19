@@ -12,10 +12,10 @@ import {
   DoodleSun,
   UnionJackBunting,
 } from "@/components/site/Doodles";
-import heroImg from "@/assets/hero-illustration.jpg";
-import skolickaImg from "@/assets/skolicka-scene.jpg";
-import detiImg from "@/assets/deti-scene.jpg";
-import dospeliImg from "@/assets/dospeli-scene.jpg";
+import heroImg from "@/assets/real/hero-real.jpg.asset.json";
+import skolickaImg from "@/assets/real/skolicka-real.jpg.asset.json";
+import detiImg from "@/assets/real/kurzy-real.jpg.asset.json";
+import dospeliImg from "@/assets/real/program-real.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
