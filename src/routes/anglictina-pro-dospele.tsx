@@ -5,7 +5,9 @@ import { CTAButton } from "@/components/site/CTAButton";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { CallanDownloads } from "@/components/site/CallanDownloads";
 import { DoodleStar } from "@/components/site/Doodles";
-import dospeliImg from "@/assets/dospeli-scene.jpg";
+import dospeliAsset from "@/assets/real/program-real.jpg.asset.json";
+
+const dospeliImg = dospeliAsset.url;
 
 export const Route = createFileRoute("/anglictina-pro-dospele")({
   head: () => ({
