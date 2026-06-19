@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
+import centrumLogo from "@/assets/real/logo-anglicke-centrum.png.asset.json";
+import skolickaLogo from "@/assets/real/logo-anglicka-skolicka.png.asset.json";
 
 const nav = [
   { to: "/", label: "Domů" },
@@ -18,12 +20,17 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b-2 border-foreground/90 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-royal text-royal-foreground font-display text-xl font-bold sticker-sm">
-            AC
-          </div>
-          <div className="hidden sm:block leading-tight">
-            <div className="font-display text-lg font-bold text-foreground">Anglické Centrum</div>
-            <div className="text-xs text-muted-foreground">Plzeň · od 2011</div>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <img
+              src={centrumLogo.url}
+              alt="Logo Anglické Centrum"
+              className="h-9 w-auto sm:h-10 lg:h-11"
+            />
+            <img
+              src={skolickaLogo.url}
+              alt="Logo Anglická školička"
+              className="h-10 w-auto sm:h-11 lg:h-12"
+            />
           </div>
         </Link>
 
