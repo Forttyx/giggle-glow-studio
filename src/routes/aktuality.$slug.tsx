@@ -50,7 +50,7 @@ export const Route = createFileRoute("/aktuality/$slug")({
 });
 
 function PostPage() {
-  const post = Route.useLoaderData();
+  const post = Route.useLoaderData() as { date: string; title: string; body: string[] };
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">

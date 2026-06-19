@@ -9,38 +9,194 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ONasRouteImport } from './routes/o-nas'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as GdprRouteImport } from './routes/gdpr'
+import { Route as AnglictinaProDospeleRouteImport } from './routes/anglictina-pro-dospele'
+import { Route as AnglictinaProDetiRouteImport } from './routes/anglictina-pro-deti'
+import { Route as AnglickaSkolickaRouteImport } from './routes/anglicka-skolicka'
+import { Route as AktualityRouteImport } from './routes/aktuality'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AktualitySlugRouteImport } from './routes/aktuality.$slug'
 
+const ONasRoute = ONasRouteImport.update({
+  id: '/o-nas',
+  path: '/o-nas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GdprRoute = GdprRouteImport.update({
+  id: '/gdpr',
+  path: '/gdpr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnglictinaProDospeleRoute = AnglictinaProDospeleRouteImport.update({
+  id: '/anglictina-pro-dospele',
+  path: '/anglictina-pro-dospele',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnglictinaProDetiRoute = AnglictinaProDetiRouteImport.update({
+  id: '/anglictina-pro-deti',
+  path: '/anglictina-pro-deti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnglickaSkolickaRoute = AnglickaSkolickaRouteImport.update({
+  id: '/anglicka-skolicka',
+  path: '/anglicka-skolicka',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AktualityRoute = AktualityRouteImport.update({
+  id: '/aktuality',
+  path: '/aktuality',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AktualitySlugRoute = AktualitySlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => AktualityRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aktuality': typeof AktualityRouteWithChildren
+  '/anglicka-skolicka': typeof AnglickaSkolickaRoute
+  '/anglictina-pro-deti': typeof AnglictinaProDetiRoute
+  '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
+  '/gdpr': typeof GdprRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/aktuality/$slug': typeof AktualitySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aktuality': typeof AktualityRouteWithChildren
+  '/anglicka-skolicka': typeof AnglickaSkolickaRoute
+  '/anglictina-pro-deti': typeof AnglictinaProDetiRoute
+  '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
+  '/gdpr': typeof GdprRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/aktuality/$slug': typeof AktualitySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aktuality': typeof AktualityRouteWithChildren
+  '/anglicka-skolicka': typeof AnglickaSkolickaRoute
+  '/anglictina-pro-deti': typeof AnglictinaProDetiRoute
+  '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
+  '/gdpr': typeof GdprRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/aktuality/$slug': typeof AktualitySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aktuality'
+    | '/anglicka-skolicka'
+    | '/anglictina-pro-deti'
+    | '/anglictina-pro-dospele'
+    | '/gdpr'
+    | '/kontakt'
+    | '/o-nas'
+    | '/aktuality/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aktuality'
+    | '/anglicka-skolicka'
+    | '/anglictina-pro-deti'
+    | '/anglictina-pro-dospele'
+    | '/gdpr'
+    | '/kontakt'
+    | '/o-nas'
+    | '/aktuality/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/aktuality'
+    | '/anglicka-skolicka'
+    | '/anglictina-pro-deti'
+    | '/anglictina-pro-dospele'
+    | '/gdpr'
+    | '/kontakt'
+    | '/o-nas'
+    | '/aktuality/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AktualityRoute: typeof AktualityRouteWithChildren
+  AnglickaSkolickaRoute: typeof AnglickaSkolickaRoute
+  AnglictinaProDetiRoute: typeof AnglictinaProDetiRoute
+  AnglictinaProDospeleRoute: typeof AnglictinaProDospeleRoute
+  GdprRoute: typeof GdprRoute
+  KontaktRoute: typeof KontaktRoute
+  ONasRoute: typeof ONasRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/o-nas': {
+      id: '/o-nas'
+      path: '/o-nas'
+      fullPath: '/o-nas'
+      preLoaderRoute: typeof ONasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gdpr': {
+      id: '/gdpr'
+      path: '/gdpr'
+      fullPath: '/gdpr'
+      preLoaderRoute: typeof GdprRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anglictina-pro-dospele': {
+      id: '/anglictina-pro-dospele'
+      path: '/anglictina-pro-dospele'
+      fullPath: '/anglictina-pro-dospele'
+      preLoaderRoute: typeof AnglictinaProDospeleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anglictina-pro-deti': {
+      id: '/anglictina-pro-deti'
+      path: '/anglictina-pro-deti'
+      fullPath: '/anglictina-pro-deti'
+      preLoaderRoute: typeof AnglictinaProDetiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anglicka-skolicka': {
+      id: '/anglicka-skolicka'
+      path: '/anglicka-skolicka'
+      fullPath: '/anglicka-skolicka'
+      preLoaderRoute: typeof AnglickaSkolickaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aktuality': {
+      id: '/aktuality'
+      path: '/aktuality'
+      fullPath: '/aktuality'
+      preLoaderRoute: typeof AktualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +204,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aktuality/$slug': {
+      id: '/aktuality/$slug'
+      path: '/$slug'
+      fullPath: '/aktuality/$slug'
+      preLoaderRoute: typeof AktualitySlugRouteImport
+      parentRoute: typeof AktualityRoute
+    }
   }
 }
 
+interface AktualityRouteChildren {
+  AktualitySlugRoute: typeof AktualitySlugRoute
+}
+
+const AktualityRouteChildren: AktualityRouteChildren = {
+  AktualitySlugRoute: AktualitySlugRoute,
+}
+
+const AktualityRouteWithChildren = AktualityRoute._addFileChildren(
+  AktualityRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AktualityRoute: AktualityRouteWithChildren,
+  AnglickaSkolickaRoute: AnglickaSkolickaRoute,
+  AnglictinaProDetiRoute: AnglictinaProDetiRoute,
+  AnglictinaProDospeleRoute: AnglictinaProDospeleRoute,
+  GdprRoute: GdprRoute,
+  KontaktRoute: KontaktRoute,
+  ONasRoute: ONasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
