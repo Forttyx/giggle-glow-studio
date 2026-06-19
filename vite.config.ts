@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Vercel deployment: po pushi do GitHub repa Vercel detekuje NITRO_PRESET automaticky,
+  // ale tímto preset hard-pinneme pro vlastní CI. Uvnitř Lovable sandboxu se preset
+  // přepíše zpět na cloudflare (viz @lovable.dev/vite-tanstack-config docs).
+  nitro: { preset: "vercel" },
 });
