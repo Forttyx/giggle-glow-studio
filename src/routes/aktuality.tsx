@@ -2,6 +2,80 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
 import { ArrowRight, CalendarDays } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const SHEET_CSV_URL =
+  "https://docs.google.com/spreadsheets/d/1rUO_IBfov5qiS_GwDPh4KP7oup6J_GUbb9dLjbs-zpY/export?format=csv";
+
+type NewsItem = { id: string; datum: string; titulek: string; text: string };
+
+function parseCsv(text: string): NewsItem[] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else if (c === '"') {
+        inQuotes = false;
+      } else {
+        field += c;
+      }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ",") {
+        row.push(field);
+        field = "";
+      } else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = "";
+      } else field += c;
+    }
+  }
+  if (field.length > 0 || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+  if (rows.length < 2) return [];
+  const header = rows[0].map((h) => h.trim().toLowerCase());
+  const idx = (name: string) => header.indexOf(name);
+  const iId = idx("id");
+  const iDate = idx("datum");
+  const iTitle = idx("titulek");
+  const iText = idx("text");
+  return rows
+    .slice(1)
+    .filter((r) => r.some((c) => c && c.trim().length > 0))
+    .map((r) => ({
+      id: (r[iId] ?? "").trim(),
+      datum: (r[iDate] ?? "").trim(),
+      titulek: (r[iTitle] ?? "").trim(),
+      text: (r[iText] ?? "").trim(),
+    }));
+}
+
+function parseCzDate(s: string): number {
+  const m = s.match(/^(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{2,4})$/);
+  if (!m) return 0;
+  const [, d, mo, y] = m;
+  return new Date(Number(y.length === 2 ? `20${y}` : y), Number(mo) - 1, Number(d)).getTime();
+}
+
+async function fetchNews(): Promise<NewsItem[]> {
+  const res = await fetch(SHEET_CSV_URL);
+  if (!res.ok) throw new Error("Nepodařilo se načíst aktuality");
+  const csv = await res.text();
+  const items = parseCsv(csv);
+  return items.sort((a, b) => parseCzDate(b.datum) - parseCzDate(a.datum));
+}
 
 export const Route = createFileRoute("/aktuality")({
   head: () => ({
@@ -15,40 +89,68 @@ export const Route = createFileRoute("/aktuality")({
   component: AktualityPage,
 });
 
-const news = [
-  {
-    slug: "hledame-posily-do-tymu",
-    date: "4. 10. 2024",
-    title: "Hledáme nové posily do našeho týmu",
-    excerpt: "Rozšiřujeme tým o lektorky angličtiny pro děti i dospělé. Ozvěte se nám, pokud máte rádi děti a chcete učit anglicky.",
-  },
-  {
-    slug: "den-otevrenych-dveri-2024",
-    date: "16. 7. 2024",
-    title: "Den otevřených dveří pro školní rok 2024/25",
-    excerpt: "Přijďte se podívat do naší anglické školičky, seznámit se s lektorkami a programem.",
-  },
-];
-
 function AktualityPage() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["aktuality-sheet"],
+    queryFn: fetchNews,
+    staleTime: 5 * 60 * 1000,
+  });
+
   return (
     <PageShell>
       <PageHero eyebrow="Aktuality" title="Co se u nás děje" />
-      <section className="mx-auto max-w-4xl space-y-6 px-4 py-16 sm:px-6">
-        {news.map((n, i) => (
-          <Link key={n.slug} to="/aktuality/$slug" params={{ slug: n.slug }} className="block">
-            <StickerCard variant={i % 2 === 0 ? "white" : "cream"} className="sticker-hover">
-              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-british-red">
-                <CalendarDays className="h-4 w-4" /> {n.date}
-              </div>
-              <h2 className="mt-2 font-display text-2xl font-bold">{n.title}</h2>
-              <p className="mt-2 text-foreground/80">{n.excerpt}</p>
-              <div className="mt-3 inline-flex items-center gap-2 font-bold text-royal">
-                Zobrazit více <ArrowRight className="h-4 w-4" />
-              </div>
-            </StickerCard>
-          </Link>
-        ))}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        {isLoading && (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <StickerCard key={i} variant="white" className="space-y-3">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-6 w-3/4" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+                <Skeleton className="h-4 w-2/3" />
+              </StickerCard>
+            ))}
+          </div>
+        )}
+        {isError && (
+          <StickerCard variant="cream" className="text-center">
+            <p className="font-bold text-british-red">Aktuality se nepodařilo načíst.</p>
+            <p className="mt-1 text-foreground/70">Zkuste to prosím za chvíli znovu.</p>
+          </StickerCard>
+        )}
+        {!isLoading && !isError && data && data.length === 0 && (
+          <StickerCard variant="cream" className="text-center">
+            <p className="font-bold">Zatím žádné aktuality.</p>
+          </StickerCard>
+        )}
+        {!isLoading && !isError && data && data.length > 0 && (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {data.map((n, i) => {
+              const variants = ["white", "cream", "sun", "mint"] as const;
+              const variant = variants[i % variants.length];
+              return (
+                <Link
+                  key={n.id || `${n.titulek}-${i}`}
+                  to="/aktuality/$slug"
+                  params={{ slug: n.id }}
+                  className="block"
+                >
+                  <StickerCard variant={variant} className="sticker-hover flex h-full flex-col">
+                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-british-red">
+                      <CalendarDays className="h-4 w-4" /> {n.datum}
+                    </div>
+                    <h2 className="mt-2 font-display text-xl font-bold">{n.titulek}</h2>
+                    <p className="mt-2 line-clamp-4 text-foreground/80">{n.text}</p>
+                    <div className="mt-auto pt-4 inline-flex items-center gap-2 font-bold text-royal">
+                      Zobrazit více <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </StickerCard>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </section>
     </PageShell>
   );
