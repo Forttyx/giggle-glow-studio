@@ -40,11 +40,11 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1 block text-sm font-bold">Jméno a příjmení *</span>
-          <input name="name" required maxLength={100} className={inputClass} placeholder="Marcela Brabcová" />
+          <input name="name" required maxLength={100} className={inputClass} placeholder="Honza Novák" />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-bold">E-mail *</span>
-          <input name="email" type="email" required maxLength={255} className={inputClass} placeholder="vase@email.cz" />
+          <input name="email" type="email" required maxLength={255} className={inputClass} placeholder="honza.novak@email.cz" />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-bold">Telefon</span>

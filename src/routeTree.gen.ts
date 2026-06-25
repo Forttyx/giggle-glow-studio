@@ -17,6 +17,8 @@ import { Route as AnglictinaProDetiRouteImport } from './routes/anglictina-pro-d
 import { Route as AnglickaSkolickaRouteImport } from './routes/anglicka-skolicka'
 import { Route as AktualityRouteImport } from './routes/aktuality'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ONasIndexRouteImport } from './routes/o-nas.index'
+import { Route as ONasNasTymRouteImport } from './routes/o-nas.nas-tym'
 import { Route as AktualitySlugRouteImport } from './routes/aktuality.$slug'
 
 const ONasRoute = ONasRouteImport.update({
@@ -59,6 +61,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ONasIndexRoute = ONasIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ONasRoute,
+} as any)
+const ONasNasTymRoute = ONasNasTymRouteImport.update({
+  id: '/nas-tym',
+  path: '/nas-tym',
+  getParentRoute: () => ONasRoute,
+} as any)
 const AktualitySlugRoute = AktualitySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -73,8 +85,10 @@ export interface FileRoutesByFullPath {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
+  '/o-nas': typeof ONasRouteWithChildren
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas/nas-tym': typeof ONasNasTymRoute
+  '/o-nas/': typeof ONasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,8 +98,9 @@ export interface FileRoutesByTo {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas/nas-tym': typeof ONasNasTymRoute
+  '/o-nas': typeof ONasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,8 +111,10 @@ export interface FileRoutesById {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
+  '/o-nas': typeof ONasRouteWithChildren
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas/nas-tym': typeof ONasNasTymRoute
+  '/o-nas/': typeof ONasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +128,8 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas/nas-tym'
+    | '/o-nas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -120,8 +139,9 @@ export interface FileRouteTypes {
     | '/anglictina-pro-dospele'
     | '/gdpr'
     | '/kontakt'
-    | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas/nas-tym'
+    | '/o-nas'
   id:
     | '__root__'
     | '/'
@@ -133,6 +153,8 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas/nas-tym'
+    | '/o-nas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,7 +165,7 @@ export interface RootRouteChildren {
   AnglictinaProDospeleRoute: typeof AnglictinaProDospeleRoute
   GdprRoute: typeof GdprRoute
   KontaktRoute: typeof KontaktRoute
-  ONasRoute: typeof ONasRoute
+  ONasRoute: typeof ONasRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -204,6 +226,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/o-nas/': {
+      id: '/o-nas/'
+      path: '/'
+      fullPath: '/o-nas/'
+      preLoaderRoute: typeof ONasIndexRouteImport
+      parentRoute: typeof ONasRoute
+    }
+    '/o-nas/nas-tym': {
+      id: '/o-nas/nas-tym'
+      path: '/nas-tym'
+      fullPath: '/o-nas/nas-tym'
+      preLoaderRoute: typeof ONasNasTymRouteImport
+      parentRoute: typeof ONasRoute
+    }
     '/aktuality/$slug': {
       id: '/aktuality/$slug'
       path: '/$slug'
@@ -226,6 +262,18 @@ const AktualityRouteWithChildren = AktualityRoute._addFileChildren(
   AktualityRouteChildren,
 )
 
+interface ONasRouteChildren {
+  ONasNasTymRoute: typeof ONasNasTymRoute
+  ONasIndexRoute: typeof ONasIndexRoute
+}
+
+const ONasRouteChildren: ONasRouteChildren = {
+  ONasNasTymRoute: ONasNasTymRoute,
+  ONasIndexRoute: ONasIndexRoute,
+}
+
+const ONasRouteWithChildren = ONasRoute._addFileChildren(ONasRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AktualityRoute: AktualityRouteWithChildren,
@@ -234,7 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnglictinaProDospeleRoute: AnglictinaProDospeleRoute,
   GdprRoute: GdprRoute,
   KontaktRoute: KontaktRoute,
-  ONasRoute: ONasRoute,
+  ONasRoute: ONasRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

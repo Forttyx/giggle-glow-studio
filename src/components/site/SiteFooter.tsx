@@ -13,14 +13,14 @@ export function SiteFooter() {
           </p>
           <div className="mt-6 space-y-2 text-sm">
             <a href="tel:+420775220044" className="flex items-center gap-2 hover:underline">
-              <Phone className="h-4 w-4" /> +420 775 220 044
+              <Phone className="h-4 w-4" /> +420 775 22 00 44
             </a>
             <a href="mailto:info@anglickecentrum.cz" className="flex items-center gap-2 hover:underline">
               <Mail className="h-4 w-4" /> info@anglickecentrum.cz
             </a>
             <div className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
-              <span>Slovanská 149, 326 00 Plzeň – Slovany</span>
+              <span>Slovanská 149, 326 00 Plzeň 2 – Slovany</span>
             </div>
           </div>
         </div>

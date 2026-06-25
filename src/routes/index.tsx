@@ -45,39 +45,39 @@ const offerings = [
     to: "/anglicka-skolicka" as const,
     image: skolickaImg,
     icon: Sparkles,
-    title: "Anglická školička",
+    title: "Soukromá anglická školička",
     description:
       "Malá školička s domácí atmosférou pro děti 2,5–6 let. Angličtina jako druhý jazyk skrze hry, písničky a říkanky.",
     badge: "Nejoblíbenější",
     variant: "sun" as const,
   },
   {
-    to: "/anglictina-pro-deti" as const,
+    to: "/kontakt" as const,
     image: detiImg,
     icon: BookOpen,
-    title: "Angličtina pro děti",
+    title: "Skupinové kurzy angličtiny pro děti",
     description:
-      "Dopolední a odpolední kurzy vedené zábavnou a hravou formou. Připravujeme nové kurzy pro školní rok 2026/27.",
-    badge: "Nově 2026/27",
+      "Dopolední a odpolední kurzy vedené zábavnou a hravou formou v malých skupinkách. Ozvěte se nám pro aktuální nabídku.",
+    badge: "Malé skupinky",
     variant: "mint" as const,
   },
   {
-    to: "/anglictina-pro-dospele" as const,
+    to: "/kontakt" as const,
     image: dospeliImg,
     icon: GraduationCap,
-    title: "Angličtina pro dospělé",
+    title: "Individuální kurzy angličtiny pro dospělé",
     description:
-      "Callanovou metodou v malých skupinkách nebo individuálně. Začnete mluvit už od první lekce — jediní v Plzni.",
+      "Callanovou metodou individuálně nebo v páru. Začnete mluvit už od první lekce — jediní v Plzni.",
     badge: "Callanova metoda",
     variant: "cream" as const,
   },
 ];
 
 const stats = [
-  { value: "11", label: "let učíme anglicky" },
+  { value: "15", label: "let učíme anglicky" },
   { value: "8", label: "lektorů v týmu" },
   { value: "700+", label: "naučených dětí" },
-  { value: "20", label: "dětí ve školičce" },
+  { value: "20", label: "dětí ve školce" },
 ];
 
 const testimonials = [
@@ -315,7 +315,7 @@ function HomePage() {
               href="tel:+420775220044"
               className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 font-display text-base font-bold text-foreground sticker-sm sticker-hover"
             >
-              +420 775 220 044
+              +420 775 22 00 44
             </a>
           </div>
         </StickerCard>
