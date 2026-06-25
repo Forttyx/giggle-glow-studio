@@ -30,7 +30,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b-2 border-foreground/90 bg-cream/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl xl:max-w-8xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <div className="flex items-center gap-2 sm:gap-3">
             <img
@@ -46,7 +46,7 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-1">
+        <nav className="hidden xl:flex items-center gap-0.5">
           {nav.map((item) => (
             item.children ? (
               <div key={item.to} className="group relative">
