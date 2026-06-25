@@ -20,7 +20,7 @@ export function SiteFooter() {
             </a>
             <div className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
-              <span>Slovanská 149, 326 00 Plzeň – Slovany</span>
+              <span>Slovanská 149, 326 00 Plzeň 2 – Slovany</span>
             </div>
           </div>
         </div>
