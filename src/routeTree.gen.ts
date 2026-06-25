@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ONasRouteImport } from './routes/o-nas'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as GdprRouteImport } from './routes/gdpr'
 import { Route as AnglictinaProDospeleRouteImport } from './routes/anglictina-pro-dospele'
@@ -17,13 +16,9 @@ import { Route as AnglictinaProDetiRouteImport } from './routes/anglictina-pro-d
 import { Route as AnglickaSkolickaRouteImport } from './routes/anglicka-skolicka'
 import { Route as AktualityRouteImport } from './routes/aktuality'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ONasIndexRouteImport } from './routes/o-nas.index'
 import { Route as AktualitySlugRouteImport } from './routes/aktuality.$slug'
 
-const ONasRoute = ONasRouteImport.update({
-  id: '/o-nas',
-  path: '/o-nas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
@@ -59,6 +54,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ONasIndexRoute = ONasIndexRouteImport.update({
+  id: '/o-nas/',
+  path: '/o-nas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AktualitySlugRoute = AktualitySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -73,8 +73,8 @@ export interface FileRoutesByFullPath {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas/': typeof ONasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,8 +84,8 @@ export interface FileRoutesByTo {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas': typeof ONasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,8 +96,8 @@ export interface FileRoutesById {
   '/anglictina-pro-dospele': typeof AnglictinaProDospeleRoute
   '/gdpr': typeof GdprRoute
   '/kontakt': typeof KontaktRoute
-  '/o-nas': typeof ONasRoute
   '/aktuality/$slug': typeof AktualitySlugRoute
+  '/o-nas/': typeof ONasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,8 +109,8 @@ export interface FileRouteTypes {
     | '/anglictina-pro-dospele'
     | '/gdpr'
     | '/kontakt'
-    | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -120,8 +120,8 @@ export interface FileRouteTypes {
     | '/anglictina-pro-dospele'
     | '/gdpr'
     | '/kontakt'
-    | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas'
   id:
     | '__root__'
     | '/'
@@ -131,8 +131,8 @@ export interface FileRouteTypes {
     | '/anglictina-pro-dospele'
     | '/gdpr'
     | '/kontakt'
-    | '/o-nas'
     | '/aktuality/$slug'
+    | '/o-nas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,18 +143,11 @@ export interface RootRouteChildren {
   AnglictinaProDospeleRoute: typeof AnglictinaProDospeleRoute
   GdprRoute: typeof GdprRoute
   KontaktRoute: typeof KontaktRoute
-  ONasRoute: typeof ONasRoute
+  ONasIndexRoute: typeof ONasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/o-nas': {
-      id: '/o-nas'
-      path: '/o-nas'
-      fullPath: '/o-nas'
-      preLoaderRoute: typeof ONasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/kontakt': {
       id: '/kontakt'
       path: '/kontakt'
@@ -204,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/o-nas/': {
+      id: '/o-nas/'
+      path: '/o-nas'
+      fullPath: '/o-nas/'
+      preLoaderRoute: typeof ONasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/aktuality/$slug': {
       id: '/aktuality/$slug'
       path: '/$slug'
@@ -234,18 +234,8 @@ const rootRouteChildren: RootRouteChildren = {
   AnglictinaProDospeleRoute: AnglictinaProDospeleRoute,
   GdprRoute: GdprRoute,
   KontaktRoute: KontaktRoute,
-  ONasRoute: ONasRoute,
+  ONasIndexRoute: ONasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -4,7 +4,7 @@ import { StickerCard } from "@/components/site/StickerCard";
 import { CTAButton } from "@/components/site/CTAButton";
 import { DoodleStar } from "@/components/site/Doodles";
 
-export const Route = createFileRoute("/o-nas")({
+export const Route = createFileRoute("/o-nas/")({
   head: () => ({
     meta: [
       { title: "O nás — Anglické Centrum Plzeň" },
