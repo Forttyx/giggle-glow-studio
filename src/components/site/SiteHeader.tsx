@@ -30,7 +30,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b-2 border-foreground/90 bg-cream/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl xl:max-w-8xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <div className="flex items-center gap-2 sm:gap-3">
             <img
@@ -46,13 +46,13 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-1">
+        <nav className="hidden xl:flex items-center gap-0.5">
           {nav.map((item) => (
             item.children ? (
               <div key={item.to} className="group relative">
                 <Link
                   to={item.to}
-                  className="rounded-full px-3 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
+                  className="rounded-full px-2.5 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
                   activeProps={{ className: "bg-royal text-royal-foreground hover:bg-royal hover:text-royal-foreground" }}
                 >
                   {item.label}
@@ -76,7 +76,7 @@ export function SiteHeader() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="rounded-full px-3 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
+                className="rounded-full px-2.5 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
                 activeProps={{ className: "bg-royal text-royal-foreground hover:bg-royal hover:text-royal-foreground" }}
                 activeOptions={{ exact: item.to === "/" }}
               >
@@ -106,7 +106,7 @@ export function SiteHeader() {
 
       {open && (
         <div className="xl:hidden border-t-2 border-foreground/90 bg-cream">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 sm:px-6">
+          <nav className="mx-auto flex max-w-7xl xl:max-w-8xl flex-col gap-1 px-4 py-3 sm:px-6">
             {nav.map((item) => (
               <div key={item.to}>
                 <Link
