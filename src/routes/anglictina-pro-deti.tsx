@@ -75,7 +75,7 @@ function DetiPage() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <CTAAnchor href="tel:+420775220044" variant="secondary">
-              <Phone className="h-4 w-4" /> +420 775 220 044
+              <Phone className="h-4 w-4" /> +420 775 22 00 44
             </CTAAnchor>
             <CTAAnchor href="mailto:info@anglickecentrum.cz" variant="ghost">
               <Mail className="h-4 w-4" /> info@anglickecentrum.cz

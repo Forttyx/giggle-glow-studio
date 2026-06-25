@@ -8,9 +8,9 @@ export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
       { title: "Kontakt — Anglické Centrum Plzeň" },
-      { name: "description", content: "Slovanská 149, Plzeň-Slovany. Telefon +420 775 220 044, info@anglickecentrum.cz. Napište nám přes formulář." },
+      { name: "description", content: "Slovanská 149, Plzeň 2-Slovany. Telefon +420 775 22 00 44, info@anglickecentrum.cz. Napište nám přes formulář." },
       { property: "og:title", content: "Kontakt — Anglické Centrum Plzeň" },
-      { property: "og:description", content: "Slovanská 149, Plzeň-Slovany. Mgr. Marcela Brabcová." },
+      { property: "og:description", content: "Slovanská 149, Plzeň 2-Slovany. Mgr. Marcela Brabcová." },
     ],
   }),
   component: KontaktPage,
@@ -30,8 +30,8 @@ function KontaktPage() {
           <div className="space-y-6">
             <StickerCard variant="sun" className="-rotate-1">
               <div className="space-y-4">
-                <a href="tel:+420775220044" className="flex items-center gap-3 font-display text-xl font-bold">
-                  <Phone className="h-5 w-5" /> +420 775 220 044
+                <a href="tel:+420775220044" className="flex items-center gap-3 font-display text-xl font-bold whitespace-nowrap">
+                  <Phone className="h-5 w-5" /> +420 775 22 00 44
                 </a>
                 <a href="mailto:info@anglickecentrum.cz" className="flex items-center gap-3 font-display text-lg font-bold">
                   <Mail className="h-5 w-5" /> info@anglickecentrum.cz
@@ -40,7 +40,7 @@ function KontaktPage() {
                   <MapPin className="mt-0.5 h-5 w-5" />
                   <div>
                     <div className="font-display font-bold">Slovanská 149</div>
-                    <div className="text-sm">326 00 Plzeň – Slovany</div>
+                    <div className="text-sm">326 00 Plzeň 2 – Slovany</div>
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@ function KontaktPage() {
         <div className="mt-12 overflow-hidden rounded-3xl border-2 border-foreground/90 sticker">
           <iframe
             title="Mapa — Slovanská 149, Plzeň"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=13.395%2C49.738%2C13.413%2C49.748&layer=mapnik&marker=49.7431%2C13.4042"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=13.388%2C49.724%2C13.406%2C49.732&layer=mapnik&marker=49.728188%2C13.396653"
             className="h-80 w-full"
             loading="lazy"
           />

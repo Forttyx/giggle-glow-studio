@@ -13,7 +13,7 @@ export function SiteFooter() {
           </p>
           <div className="mt-6 space-y-2 text-sm">
             <a href="tel:+420775220044" className="flex items-center gap-2 hover:underline">
-              <Phone className="h-4 w-4" /> +420 775 220 044
+              <Phone className="h-4 w-4" /> +420 775 22 00 44
             </a>
             <a href="mailto:info@anglickecentrum.cz" className="flex items-center gap-2 hover:underline">
               <Mail className="h-4 w-4" /> info@anglickecentrum.cz

@@ -147,7 +147,7 @@ function SkolickaPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <div className="font-display text-lg font-bold">Stravné</div>
-              <p className="text-sm text-foreground/80">Dopolední 120 Kč/den · celodenní 150 Kč/den. Odhlášení obědů nejpozději do 20:00 předchozího dne.</p>
+              <p className="text-sm text-foreground/80">Dopolední 140 Kč/den · celodenní 160 Kč/den. Odhlášení obědů nejpozději do 20:00 předchozího dne.</p>
             </div>
             <div>
               <div className="font-display text-lg font-bold">Sleva na sourozence</div>
