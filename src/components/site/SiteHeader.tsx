@@ -52,7 +52,7 @@ export function SiteHeader() {
               <div key={item.to} className="group relative">
                 <Link
                   to={item.to}
-                  className="rounded-full px-3 py-2 text-sm font-semibold text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
+                  className="rounded-full px-3 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
                   activeProps={{ className: "bg-royal text-royal-foreground hover:bg-royal hover:text-royal-foreground" }}
                 >
                   {item.label}
