@@ -76,7 +76,7 @@ export function SiteHeader() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="rounded-full px-3 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
+                className="rounded-full px-2.5 py-2 text-sm font-semibold whitespace-nowrap text-foreground/80 hover:bg-sun/40 hover:text-foreground transition"
                 activeProps={{ className: "bg-royal text-royal-foreground hover:bg-royal hover:text-royal-foreground" }}
                 activeOptions={{ exact: item.to === "/" }}
               >
