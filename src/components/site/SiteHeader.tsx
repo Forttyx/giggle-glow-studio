@@ -106,7 +106,7 @@ export function SiteHeader() {
 
       {open && (
         <div className="xl:hidden border-t-2 border-foreground/90 bg-cream">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 sm:px-6">
+          <nav className="mx-auto flex max-w-7xl xl:max-w-8xl flex-col gap-1 px-4 py-3 sm:px-6">
             {nav.map((item) => (
               <div key={item.to}>
                 <Link
