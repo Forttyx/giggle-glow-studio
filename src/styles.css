@@ -184,10 +184,21 @@
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
+@utility sticker-outline {
+  border: 2px solid oklch(0.22 0.05 264);
+  transition: transform 200ms ease;
+}
+
 @utility sticker-hover {
   &:hover {
     transform: translate(-2px, -2px);
     box-shadow: 8px 8px 0 0 oklch(0.22 0.05 264);
+  }
+}
+
+@utility sticker-outline-hover {
+  &:hover {
+    transform: translate(-2px, -2px);
   }
 }
 
