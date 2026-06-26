@@ -13,8 +13,19 @@ const variantMap: Record<Variant, string> = {
 
 export function StickerCard({
   variant = "cream",
+  shadow = true,
   className,
   ...rest
-}: HTMLAttributes<HTMLDivElement> & { variant?: Variant }) {
-  return <div className={cn("rounded-3xl p-6 sticker", variantMap[variant], className)} {...rest} />;
+}: HTMLAttributes<HTMLDivElement> & { variant?: Variant; shadow?: boolean }) {
+  return (
+    <div
+      className={cn(
+        "rounded-3xl p-6",
+        shadow ? "sticker" : "sticker-outline",
+        variantMap[variant],
+        className,
+      )}
+      {...rest}
+    />
+  );
 }
