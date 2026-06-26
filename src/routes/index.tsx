@@ -184,7 +184,8 @@ function HomePage() {
               <Link key={o.to} to={o.to} className="group block">
                 <StickerCard
                   variant={o.variant}
-                  className="flex h-full flex-col overflow-hidden p-0 sticker-hover"
+                  shadow={false}
+                  className="flex h-full flex-col overflow-hidden p-0 sticker-outline-hover"
                 >
                   <div className="relative">
                     <img
