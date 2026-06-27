@@ -1,14 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
-import { ArrowLeft, CalendarDays } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1rUO_IBfov5qiS_GwDPh4KP7oup6J_GUbb9dLjbs-zpY/export?format=csv";
 
-type NewsItem = { id: string; datum: string; titulek: string; text: string };
+type NewsItem = { id: string; titulek: string; podtext: string; text: string };
 
 function parseCsv(text: string): NewsItem[] {
   const rows: string[][] = [];
@@ -34,15 +36,15 @@ function parseCsv(text: string): NewsItem[] {
   if (rows.length < 2) return [];
   const header = rows[0].map((h) => h.trim().toLowerCase());
   const iId = header.indexOf("id");
-  const iDate = header.indexOf("datum");
   const iTitle = header.indexOf("titulek");
+  const iPod = header.indexOf("podtext");
   const iText = header.indexOf("text");
   return rows.slice(1)
     .filter((r) => r.some((c) => c && c.trim().length > 0))
     .map((r) => ({
       id: (r[iId] ?? "").trim(),
-      datum: (r[iDate] ?? "").trim(),
       titulek: (r[iTitle] ?? "").trim(),
+      podtext: (r[iPod] ?? "").trim(),
       text: (r[iText] ?? "").trim(),
     }));
 }
@@ -93,12 +95,28 @@ function PostPage() {
         )}
         {!isLoading && post && (
           <>
-            <div className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-british-red">
-              <CalendarDays className="h-4 w-4" /> {post.datum}
-            </div>
-            <h1 className="mt-2 font-display text-4xl font-bold text-foreground sm:text-5xl">{post.titulek}</h1>
-            <StickerCard variant="cream" className="mt-8 space-y-4 text-base text-foreground/80 whitespace-pre-line">
-              {post.text}
+            <h1 className="mt-6 font-display text-4xl font-bold text-foreground sm:text-5xl">{post.titulek}</h1>
+            {post.podtext && (
+              <p className="mt-3 text-lg text-foreground/70">{post.podtext}</p>
+            )}
+            <StickerCard variant="cream" className="mt-8 text-base text-foreground/80">
+              <div className="prose-aktuality">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: (props) => <h2 className="mt-6 mb-3 font-display text-2xl font-bold text-royal" {...props} />,
+                    h2: (props) => <h3 className="mt-6 mb-3 font-display text-xl font-bold text-royal" {...props} />,
+                    h3: (props) => <h4 className="mt-5 mb-2 font-display text-lg font-bold text-royal" {...props} />,
+                    p: (props) => <p className="my-3 leading-relaxed" {...props} />,
+                    ul: (props) => <ul className="my-3 list-disc space-y-1 pl-6" {...props} />,
+                    ol: (props) => <ol className="my-3 list-decimal space-y-1 pl-6" {...props} />,
+                    a: (props) => <a className="font-bold text-royal underline" target="_blank" rel="noreferrer" {...props} />,
+                    strong: (props) => <strong className="font-bold text-foreground" {...props} />,
+                  }}
+                >
+                  {post.text}
+                </ReactMarkdown>
+              </div>
             </StickerCard>
           </>
         )}

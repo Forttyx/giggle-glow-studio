@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1rUO_IBfov5qiS_GwDPh4KP7oup6J_GUbb9dLjbs-zpY/export?format=csv";
 
-type NewsItem = { id: string; datum: string; titulek: string; text: string };
+type NewsItem = { id: string; titulek: string; podtext: string; text: string };
 
 function parseCsv(text: string): NewsItem[] {
   const rows: string[][] = [];
@@ -48,33 +48,25 @@ function parseCsv(text: string): NewsItem[] {
   const header = rows[0].map((h) => h.trim().toLowerCase());
   const idx = (name: string) => header.indexOf(name);
   const iId = idx("id");
-  const iDate = idx("datum");
   const iTitle = idx("titulek");
+  const iPod = idx("podtext");
   const iText = idx("text");
   return rows
     .slice(1)
     .filter((r) => r.some((c) => c && c.trim().length > 0))
     .map((r) => ({
       id: (r[iId] ?? "").trim(),
-      datum: (r[iDate] ?? "").trim(),
       titulek: (r[iTitle] ?? "").trim(),
+      podtext: (r[iPod] ?? "").trim(),
       text: (r[iText] ?? "").trim(),
     }));
-}
-
-function parseCzDate(s: string): number {
-  const m = s.match(/^(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{2,4})$/);
-  if (!m) return 0;
-  const [, d, mo, y] = m;
-  return new Date(Number(y.length === 2 ? `20${y}` : y), Number(mo) - 1, Number(d)).getTime();
 }
 
 async function fetchNews(): Promise<NewsItem[]> {
   const res = await fetch(SHEET_CSV_URL);
   if (!res.ok) throw new Error("Nepodařilo se načíst aktuality");
   const csv = await res.text();
-  const items = parseCsv(csv);
-  return items.sort((a, b) => parseCzDate(b.datum) - parseCzDate(a.datum));
+  return parseCsv(csv);
 }
 
 export const Route = createFileRoute("/aktuality")({
@@ -137,11 +129,8 @@ function AktualityPage() {
                   className="block"
                 >
                   <StickerCard variant={variant} className="sticker-hover flex h-full flex-col">
-                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-british-red">
-                      <CalendarDays className="h-4 w-4" /> {n.datum}
-                    </div>
-                    <h2 className="mt-2 font-display text-xl font-bold">{n.titulek}</h2>
-                    <p className="mt-2 line-clamp-4 text-foreground/80">{n.text}</p>
+                    <h2 className="font-display text-xl font-bold">{n.titulek}</h2>
+                    <p className="mt-2 line-clamp-4 text-foreground/80">{n.podtext}</p>
                     <div className="mt-auto pt-4 inline-flex items-center gap-2 font-bold text-royal">
                       Zobrazit více <ArrowRight className="h-4 w-4" />
                     </div>
