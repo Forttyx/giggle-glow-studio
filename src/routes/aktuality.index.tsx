@@ -69,7 +69,7 @@ async function fetchNews(): Promise<NewsItem[]> {
   return parseCsv(csv);
 }
 
-export const Route = createFileRoute("/aktuality")({
+export const Route = createFileRoute("/aktuality/")({
   head: () => ({
     meta: [
       { title: "Aktuality — Anglické Centrum Plzeň" },
