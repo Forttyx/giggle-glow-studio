@@ -147,7 +147,7 @@ function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="rounded-[2rem] bg-card p-3 sticker rotate-1">
+            <div className="rounded-[2rem] bg-card p-3 sticker-outline rotate-1">
               <img
                 src={heroImg}
                 alt="Děti se učí anglicky v Anglickém Centru Plzeň"
