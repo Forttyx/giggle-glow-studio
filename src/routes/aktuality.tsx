@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
 import { StickerCard } from "@/components/site/StickerCard";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -129,11 +129,8 @@ function AktualityPage() {
                   className="block"
                 >
                   <StickerCard variant={variant} className="sticker-hover flex h-full flex-col">
-                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-british-red">
-                      <CalendarDays className="h-4 w-4" /> {n.datum}
-                    </div>
-                    <h2 className="mt-2 font-display text-xl font-bold">{n.titulek}</h2>
-                    <p className="mt-2 line-clamp-4 text-foreground/80">{n.text}</p>
+                    <h2 className="font-display text-xl font-bold">{n.titulek}</h2>
+                    <p className="mt-2 line-clamp-4 text-foreground/80">{n.podtext}</p>
                     <div className="mt-auto pt-4 inline-flex items-center gap-2 font-bold text-royal">
                       Zobrazit více <ArrowRight className="h-4 w-4" />
                     </div>
