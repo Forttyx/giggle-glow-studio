@@ -39,7 +39,7 @@ function DospeliPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid items-start gap-10 lg:grid-cols-2">
-          <div className="rounded-[2rem] bg-card p-3 sticker -rotate-1">
+          <div className="rounded-[2rem] bg-card p-3 sticker-outline -rotate-1">
             <img
               src={dospeliImg}
               alt="Konverzační kurz angličtiny pro dospělé"

@@ -83,7 +83,7 @@ function KontaktPage() {
         </div>
 
         {/* MAPA */}
-        <div className="mt-12 overflow-hidden rounded-3xl border-2 border-foreground/90 sticker">
+        <div className="mt-12 overflow-hidden rounded-3xl border-2 border-foreground/90 sticker-outline">
           <iframe
             title="Mapa — Slovanská 149, Plzeň"
             src="https://www.openstreetmap.org/export/embed.html?bbox=13.388%2C49.724%2C13.406%2C49.732&layer=mapnik&marker=49.728188%2C13.396653"
