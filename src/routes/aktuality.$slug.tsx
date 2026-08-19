@@ -12,6 +12,13 @@ const SHEET_CSV_URL =
 
 type NewsItem = { id: string; titulek: string; podtext: string; text: string; obrazky: string[] };
 
+// Převede sdílený odkaz z Google Drive na přímý odkaz na obrázek.
+function normalizeImageUrl(url: string): string {
+  const m = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]+)/);
+  if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1600`;
+  return url;
+}
+
 function parseCsv(text: string): NewsItem[] {
   const rows: string[][] = [];
   let row: string[] = [];
@@ -50,7 +57,8 @@ function parseCsv(text: string): NewsItem[] {
       obrazky: (iImg >= 0 ? (r[iImg] ?? "") : "")
         .split(/[\s,;]+/)
         .map((u) => u.trim())
-        .filter((u) => /^https?:\/\//.test(u)),
+        .filter((u) => /^https?:\/\//.test(u))
+        .map(normalizeImageUrl),
     }));
 }
 
