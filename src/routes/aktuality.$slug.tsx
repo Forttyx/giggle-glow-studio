@@ -139,6 +139,7 @@ function PostPage() {
                     src={src}
                     alt={`${post.titulek} — obrázek ${i + 1}`}
                     loading="lazy"
+                    referrerPolicy="no-referrer"
                     className="w-full rounded-3xl border-2 border-foreground object-cover"
                   />
                 ))}
