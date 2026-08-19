@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1rUO_IBfov5qiS_GwDPh4KP7oup6J_GUbb9dLjbs-zpY/export?format=csv";
 
-type NewsItem = { id: string; titulek: string; podtext: string; text: string };
+type NewsItem = { id: string; titulek: string; podtext: string; text: string; obrazky: string[] };
 
 function parseCsv(text: string): NewsItem[] {
   const rows: string[][] = [];
@@ -51,6 +51,7 @@ function parseCsv(text: string): NewsItem[] {
   const iTitle = idx("titulek");
   const iPod = idx("podtext");
   const iText = idx("text");
+  const iImg = header.findIndex((h) => h === "obrázky" || h === "obrazky");
   return rows
     .slice(1)
     .filter((r) => r.some((c) => c && c.trim().length > 0))
@@ -59,6 +60,10 @@ function parseCsv(text: string): NewsItem[] {
       titulek: (r[iTitle] ?? "").trim(),
       podtext: (r[iPod] ?? "").trim(),
       text: (r[iText] ?? "").trim(),
+      obrazky: (iImg >= 0 ? (r[iImg] ?? "") : "")
+        .split(/[\s,;]+/)
+        .map((u) => u.trim())
+        .filter((u) => /^https?:\/\//.test(u)),
     }));
 }
 

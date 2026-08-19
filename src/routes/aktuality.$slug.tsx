@@ -10,7 +10,7 @@ import remarkGfm from "remark-gfm";
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1rUO_IBfov5qiS_GwDPh4KP7oup6J_GUbb9dLjbs-zpY/export?format=csv";
 
-type NewsItem = { id: string; titulek: string; podtext: string; text: string };
+type NewsItem = { id: string; titulek: string; podtext: string; text: string; obrazky: string[] };
 
 function parseCsv(text: string): NewsItem[] {
   const rows: string[][] = [];
@@ -39,6 +39,7 @@ function parseCsv(text: string): NewsItem[] {
   const iTitle = header.indexOf("titulek");
   const iPod = header.indexOf("podtext");
   const iText = header.indexOf("text");
+  const iImg = header.findIndex((h) => h === "obrázky" || h === "obrazky");
   return rows.slice(1)
     .filter((r) => r.some((c) => c && c.trim().length > 0))
     .map((r) => ({
@@ -46,6 +47,10 @@ function parseCsv(text: string): NewsItem[] {
       titulek: (r[iTitle] ?? "").trim(),
       podtext: (r[iPod] ?? "").trim(),
       text: (r[iText] ?? "").trim(),
+      obrazky: (iImg >= 0 ? (r[iImg] ?? "") : "")
+        .split(/[\s,;]+/)
+        .map((u) => u.trim())
+        .filter((u) => /^https?:\/\//.test(u)),
     }));
 }
 
@@ -118,6 +123,19 @@ function PostPage() {
                 </ReactMarkdown>
               </div>
             </StickerCard>
+            {post.obrazky.length > 0 && (
+              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                {post.obrazky.map((src, i) => (
+                  <img
+                    key={src + i}
+                    src={src}
+                    alt={`${post.titulek} — obrázek ${i + 1}`}
+                    loading="lazy"
+                    className="w-full rounded-3xl border-2 border-foreground object-cover"
+                  />
+                ))}
+              </div>
+            )}
           </>
         )}
       </article>
